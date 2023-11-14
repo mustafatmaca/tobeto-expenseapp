@@ -1,4 +1,5 @@
 import 'package:expense_app/models/expense.dart';
+import 'package:expense_app/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseList extends StatefulWidget {
@@ -42,19 +43,10 @@ class _ExpenseListState extends State<ExpenseList> {
           ),
           Expanded(
             flex: 3,
-            child: ListView.separated(
+            child: ListView.builder(
               itemCount: expenses.length,
               itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(expenses[index].name),
-                  subtitle: Text(expenses[index].category.name.toUpperCase()),
-                  trailing: Text(expenses[index].price.toString()),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const Divider(
-                  color: Colors.black12,
-                );
+                return ExpenseItem(expenses[index]);
               },
             ),
           ),
