@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({Key? key}) : super(key: key);
@@ -10,11 +11,18 @@ class NewExpense extends StatefulWidget {
 class _NewExpenseState extends State<NewExpense> {
   final _nameController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime _date = DateTime.now();
+
+  void changeDateText(date) {
+    setState(() {
+      _date = date;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           TextField(
@@ -29,17 +37,24 @@ class _NewExpenseState extends State<NewExpense> {
                 const InputDecoration(label: Text("Amount"), prefixText: "₺"),
           ),
           IconButton(
-              onPressed: () {
-                //DatePicker
-                //DatePicker'dan gelen değeri yazdırmak
+              onPressed: () async {
+                var date = await showDatePicker(
+                  context: context,
+                  initialDate: _date,
+                  firstDate: DateTime(2000, 1, 1),
+                  lastDate: DateTime.now(),
+                );
+                if (date != null) {
+                  changeDateText(date);
+                }
               },
-              icon: Icon(Icons.calendar_month)),
-          Text("Tarih Seçiniz"), //seçilen tarih yazdır
+              icon: const Icon(Icons.calendar_month)),
+          Text(DateFormat.yMd().format(_date)),
           ElevatedButton(
               onPressed: () {
                 print("Kayıt Başarılı: ${_nameController.text}");
               },
-              child: Text("Kaydet"))
+              child: const Text("Kaydet"))
         ],
       ),
     );

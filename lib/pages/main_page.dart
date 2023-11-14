@@ -22,7 +22,7 @@ class MainPage extends StatelessWidget {
           IconButton(
             onPressed: () {
               showModalBottomSheet(
-                  context: context, builder: (context) => NewExpense());
+                  context: context, builder: (context) => const NewExpense());
             },
             icon: const Icon(
               Icons.add,
