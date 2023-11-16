@@ -3,26 +3,11 @@ import 'package:expense_app/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseList extends StatefulWidget {
-  const ExpenseList({Key? key}) : super(key: key);
-
   @override
   _ExpenseListState createState() => _ExpenseListState();
 }
 
 class _ExpenseListState extends State<ExpenseList> {
-  final List<Expense> expenses = [
-    Expense(
-        name: "Hamburger",
-        price: 200,
-        date: DateTime.now(),
-        category: Category.food),
-    Expense(
-        name: "Udemy Course",
-        price: 200,
-        date: DateTime.now(),
-        category: Category.education),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Padding(

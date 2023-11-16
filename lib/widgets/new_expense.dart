@@ -52,7 +52,14 @@ class _NewExpenseState extends State<NewExpense> {
           );
         }),
       );
-    } else {}
+    } else {
+      expenses.add(Expense(
+          name: _nameController.text,
+          price: amount,
+          date: _date,
+          category: _category));
+      Navigator.pop(context);
+    }
   }
 
   @override

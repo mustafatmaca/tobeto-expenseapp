@@ -32,3 +32,16 @@ class Expense {
     return formatter.format(date);
   }
 }
+
+final List<Expense> expenses = [
+  Expense(
+      name: "Hamburger",
+      price: 200,
+      date: DateTime.now(),
+      category: Category.food),
+  Expense(
+      name: "Udemy Course",
+      price: 200,
+      date: DateTime.now(),
+      category: Category.education),
+];
