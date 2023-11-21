@@ -3,6 +3,10 @@ import 'package:expense_app/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseList extends StatefulWidget {
+  final void Function(Expense expense) onRemove;
+
+  const ExpenseList(this.onRemove, {Key? key}) : super(key: key);
+
   @override
   _ExpenseListState createState() => _ExpenseListState();
 }
@@ -31,7 +35,13 @@ class _ExpenseListState extends State<ExpenseList> {
             child: ListView.builder(
               itemCount: expenses.length,
               itemBuilder: (context, index) {
-                return ExpenseItem(expenses[index]);
+                return Dismissible(
+                  key: ValueKey(expenses[index]),
+                  child: ExpenseItem(expenses[index]),
+                  onDismissed: (direction) {
+                    widget.onRemove(expenses[index]);
+                  },
+                );
               },
             ),
           ),

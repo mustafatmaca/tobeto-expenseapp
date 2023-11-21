@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({Key? key}) : super(key: key);
+  final void Function(Expense expense) onAdd;
+
+  const NewExpense({required this.onAdd, Key? key}) : super(key: key);
 
   @override
   _NewExpenseState createState() => _NewExpenseState();
@@ -40,20 +42,20 @@ class _NewExpenseState extends State<NewExpense> {
         context: context,
         builder: ((context) {
           return AlertDialog(
-            title: Text("Validation Error"),
-            content: Text("Please fill all blank areas."),
+            title: const Text("Validation Error"),
+            content: const Text("Please fill all blank areas."),
             actions: [
               TextButton(
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: Text("OK"))
+                  child: const Text("OK"))
             ],
           );
         }),
       );
     } else {
-      expenses.add(Expense(
+      widget.onAdd(Expense(
           name: _nameController.text,
           price: amount,
           date: _date,
@@ -83,7 +85,7 @@ class _NewExpenseState extends State<NewExpense> {
                       label: Text("Amount"), prefixText: "₺"),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 100,
               ),
               Expanded(
@@ -100,13 +102,13 @@ class _NewExpenseState extends State<NewExpense> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 50,
           ),
           Row(
             children: [
-              Text("Choose Category:"),
-              Spacer(),
+              const Text("Choose Category:"),
+              const Spacer(),
               DropdownButton(
                   value: _category,
                   items: Category.values.map((category) {
@@ -122,7 +124,7 @@ class _NewExpenseState extends State<NewExpense> {
                   })
             ],
           ),
-          Spacer(),
+          const Spacer(),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

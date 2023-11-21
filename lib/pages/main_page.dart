@@ -1,3 +1,4 @@
+import 'package:expense_app/models/expense.dart';
 import 'package:expense_app/pages/expense_list.dart';
 import 'package:expense_app/widgets/new_expense.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,18 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  void addExpense(Expense expense) {
+    setState(() {
+      expenses.add(expense);
+    });
+  }
+
+  void removeExpense(Expense expense) {
+    setState(() {
+      expenses.remove(expense);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +40,10 @@ class _MainPageState extends State<MainPage> {
           IconButton(
             onPressed: () async {
               await showModalBottomSheet(
-                  context: context, builder: (context) => const NewExpense());
+                  context: context,
+                  builder: (context) => NewExpense(
+                        onAdd: (expense) => addExpense(expense),
+                      ));
               setState(() {});
             },
             icon: const Icon(
@@ -41,7 +57,7 @@ class _MainPageState extends State<MainPage> {
           style: TextStyle(color: Colors.indigo),
         ),
       ),
-      body: ExpenseList(),
+      body: ExpenseList(removeExpense),
     );
   }
 }
