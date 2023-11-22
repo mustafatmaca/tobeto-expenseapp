@@ -3,32 +3,35 @@ import 'package:expense_app/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 
 class ExpenseList extends StatefulWidget {
-  final void Function(Expense expense) onRemove;
+  final Expense Function(int expenseIndex) onRemove;
+  final SnackBar Function(Expense expense) removeSnackBar;
 
-  const ExpenseList(this.onRemove, {Key? key}) : super(key: key);
+  const ExpenseList(this.onRemove, this.removeSnackBar, {Key? key})
+      : super(key: key);
 
   @override
   _ExpenseListState createState() => _ExpenseListState();
 }
 
 class _ExpenseListState extends State<ExpenseList> {
+  Expense? deletedExpense;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(top: 8.0),
       child: Column(
         children: [
-          const Text(
+          Text(
             "Charts",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           const Expanded(
             flex: 1,
             child: Center(child: Text("Charts Place")),
           ),
-          const Text(
+          Text(
             "Expenses",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           Expanded(
             flex: 3,
@@ -39,7 +42,9 @@ class _ExpenseListState extends State<ExpenseList> {
                   key: ValueKey(expenses[index]),
                   child: ExpenseItem(expenses[index]),
                   onDismissed: (direction) {
-                    widget.onRemove(expenses[index]);
+                    deletedExpense = widget.onRemove(index);
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(widget.removeSnackBar(deletedExpense!));
                   },
                 );
               },

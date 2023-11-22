@@ -73,7 +73,12 @@ class _NewExpenseState extends State<NewExpense> {
           TextField(
             controller: _nameController,
             maxLength: 50,
-            decoration: const InputDecoration(label: Text("Expense Name")),
+            style: Theme.of(context).textTheme.titleSmall,
+            decoration: InputDecoration(
+                label: Text(
+              "Expense Name",
+              style: Theme.of(context).textTheme.titleSmall,
+            )),
           ),
           Row(
             children: [
@@ -81,17 +86,27 @@ class _NewExpenseState extends State<NewExpense> {
                 child: TextField(
                   controller: _amountController,
                   keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                      label: Text("Amount"), prefixText: "₺"),
+                  style: Theme.of(context).textTheme.titleSmall,
+                  decoration: InputDecoration(
+                    label: Text(
+                      "Amount",
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    prefixText: "₺",
+                    prefixStyle: Theme.of(context).textTheme.titleSmall,
+                  ),
                 ),
               ),
               const SizedBox(
-                width: 100,
+                width: 90,
               ),
               Expanded(
                 child: Row(
                   children: [
-                    Text(DateFormat.yMd().format(_date)),
+                    Text(
+                      DateFormat.yMd().format(_date),
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
                     IconButton(
                         onPressed: () {
                           datePicker();
@@ -107,13 +122,20 @@ class _NewExpenseState extends State<NewExpense> {
           ),
           Row(
             children: [
-              const Text("Choose Category:"),
+              Text(
+                "Choose Category:",
+                style: Theme.of(context).textTheme.titleSmall,
+              ),
               const Spacer(),
               DropdownButton(
                   value: _category,
                   items: Category.values.map((category) {
                     return DropdownMenuItem(
-                        value: category, child: Text(category.name.toString()));
+                        value: category,
+                        child: Text(
+                          category.name.toString(),
+                          style: Theme.of(context).textTheme.titleSmall,
+                        ));
                   }).toList(),
                   onChanged: (value) {
                     setState(() {
@@ -133,6 +155,9 @@ class _NewExpenseState extends State<NewExpense> {
                     Navigator.pop(context);
                   },
                   child: const Text("Vazgeç")),
+              const SizedBox(
+                width: 25,
+              ),
               ElevatedButton(
                   onPressed: () {
                     addNewExpense();

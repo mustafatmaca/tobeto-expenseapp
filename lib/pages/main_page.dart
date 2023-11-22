@@ -17,47 +17,50 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
-  void removeExpense(Expense expense) {
+  Expense removeExpense(int expenseIndex) {
+    var deletedExpense;
     setState(() {
-      expenses.remove(expense);
+      deletedExpense = expenses.removeAt(expenseIndex);
     });
+    return deletedExpense;
+  }
+
+  SnackBar showSnackBar(Expense expense) {
+    return SnackBar(
+      content: const Text("Expense Removed"),
+      action: SnackBarAction(
+        label: 'Undo',
+        onPressed: () {
+          setState(() {
+            expenses.add(expense);
+          });
+        },
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        shape: const Border(
-          bottom: BorderSide(
-            color: Colors.indigo,
-            width: 1,
-          ),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            onPressed: () async {
-              await showModalBottomSheet(
+            onPressed: () {
+              showModalBottomSheet(
                   context: context,
                   builder: (context) => NewExpense(
                         onAdd: (expense) => addExpense(expense),
                       ));
-              setState(() {});
             },
             icon: const Icon(
               Icons.add,
-              color: Colors.indigo,
             ),
           ),
         ],
-        title: const Text(
-          "ExpenseApp",
-          style: TextStyle(color: Colors.indigo),
-        ),
+        title: const Text("ExpenseApp"),
       ),
-      body: ExpenseList(removeExpense),
+      body: ExpenseList(removeExpense, showSnackBar),
     );
   }
 }
