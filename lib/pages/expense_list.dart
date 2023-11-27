@@ -1,4 +1,5 @@
 import 'package:expense_app/models/expense.dart';
+import 'package:expense_app/widgets/chart.dart';
 import 'package:expense_app/widgets/expense_item.dart';
 import 'package:flutter/material.dart';
 
@@ -25,16 +26,16 @@ class _ExpenseListState extends State<ExpenseList> {
             "Charts",
             style: Theme.of(context).textTheme.titleMedium,
           ),
-          const Expanded(
-            flex: 1,
-            child: Center(child: Text("Charts Place")),
+          Expanded(
+            flex: 2,
+            child: Chart(expenses: expenses),
           ),
           Text(
             "Expenses",
             style: Theme.of(context).textTheme.titleMedium,
           ),
           Expanded(
-            flex: 3,
+            flex: 4,
             child: ListView.builder(
               itemCount: expenses.length,
               itemBuilder: (context, index) {

@@ -60,7 +60,9 @@ class _MainPageState extends State<MainPage> {
         ],
         title: const Text("ExpenseApp"),
       ),
-      body: ExpenseList(removeExpense, showSnackBar),
+      body: expenses.isNotEmpty
+          ? ExpenseList(removeExpense, showSnackBar)
+          : const Center(child: Text("Data is not exist.")),
     );
   }
 }

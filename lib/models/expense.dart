@@ -41,7 +41,7 @@ final List<Expense> expenses = [
       category: Category.food),
   Expense(
       name: "Udemy Course",
-      price: 200,
+      price: 400,
       date: DateTime.now(),
       category: Category.education),
 ];
