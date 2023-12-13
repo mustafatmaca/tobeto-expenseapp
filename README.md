@@ -1,16 +1,14 @@
-# expense_app
+# Expense App
+In this app, you can add expenses you have done and see your expenses.
 
-A new Flutter project.
+## What has been used in this project?
+- Flutter
 
-## Getting Started
+### ExpenseList Screen
+![ExpenseList Screen](https://github.com/mustafatmaca/tobeto-expenseapp/assets/58891564/be84b62c-2482-485b-b6db-9b70b02685e0)
 
-This project is a starting point for a Flutter application.
+### ExpenseList Screen (DarkMode)
+![ExpenseList Screen DarkMode](https://github.com/mustafatmaca/tobeto-expenseapp/assets/58891564/14ac9d3f-b12f-4b7a-bfea-6ed2645055b7)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### NewExpense Modal
+![NewExpense Modal](https://github.com/mustafatmaca/tobeto-expenseapp/assets/58891564/a93562c2-522b-4296-9f2d-7a408924786a)
